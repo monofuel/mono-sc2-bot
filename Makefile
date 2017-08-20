@@ -18,6 +18,9 @@ freeze:
 	# work around bug
 	pip freeze | grep -v 'pkg-resources==0.0.0' > requirements.txt
 
+py_compile: protos
+	python -m py_compile ./ai/main.py
+
 lint:
 	flake8 ./ai/
 

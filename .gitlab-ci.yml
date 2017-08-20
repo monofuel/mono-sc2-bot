@@ -5,6 +5,7 @@ before_script:
 stages:
   - init
   - lint
+  - build
 
 setup_deps:
   stage: init
@@ -23,3 +24,9 @@ lint_python:
   script:
     - docker-compose run ai make lint
     - docker-compose run ai chown -R $UID ./*
+
+compile_python:
+  stage: build
+    script:
+      - docker-compose run ai make compile_python
+      - docker-compose run ai chown -R $UID ./*
