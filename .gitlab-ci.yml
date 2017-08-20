@@ -1,0 +1,14 @@
+
+before_script:
+  - docker info
+
+stages:
+  - build
+
+submodule_setup:
+  stage: build
+  script:
+    - make setup
+  cache:
+    paths:
+      - ./cache/
