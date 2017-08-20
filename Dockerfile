@@ -7,6 +7,7 @@ RUN apk update
 RUN apk add make bash git
 RUN apk add protobuf
 RUN apk add build-base
+RUN apk add libc6-compat
 
 RUN python -V
 RUN pip -V
