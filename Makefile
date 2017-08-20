@@ -12,9 +12,11 @@ unpack:	cache/StarCraftII cache/Ladder2017Season1 cache/Replays
 
 cache/StarCraftII: cache/SC2.3.16.1.zip
 	cd cache && unzip -P iagreetotheeula SC2.3.16.1.zip
+	touch cache/StarCraftII
 
 cache/Ladder2017Season1: cache/Ladder2017Season1.zip
 	cd cache && unzip -P iagreetotheeula Ladder2017Season1.zip
+	touch cache/Ladder2017Season1
 
 cache/Replays: cache/3.16.1-Pack_1-fix.zip
 	cd cache && unzip -P iagreetotheeula 3.16.1-Pack_1-fix.zip
