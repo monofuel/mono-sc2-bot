@@ -3,12 +3,23 @@ before_script:
   - docker info
 
 stages:
-  - build
+  - init
+  - lint
 
-submodule_setup:
-  stage: build
+setup_deps:
+  stage: init
   script:
     - make setup
   cache:
     paths:
       - ./cache/
+build_containers:
+  stage: init
+  script:
+    - make docker_setup
+
+lint_python:
+  stage: lint
+  script:
+    - docker-compose run ai make lint
+    - docker-compose run ai chown -R $UID ./*

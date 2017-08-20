@@ -13,3 +13,14 @@ cache/Ladder2017Season1.zip:
 
 cache/3.16.1-Pack_1-fix.zip:
 	cd cache && wget http://blzdistsc2-a.akamaihd.net/ReplayPacks/3.16.1-Pack_1-fix.zip
+
+freeze:
+	# work around bug
+	pip freeze | grep -v 'pkg-resources==0.0.0' > requirements.txt
+
+lint:
+	flake8 ./ai/
+
+docker_setup:
+	docker-compose build
+
