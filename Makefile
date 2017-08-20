@@ -5,9 +5,10 @@ setup_git:
 	git submodule init
 	git submodule update
 
-unpack:	cache/StarCraftII cache/Ladder2017Season1 cache/3.16.1-Pack_1-fix
+unpack:	cache/StarCraftII cache/Ladder2017Season1 cache/Replays
 	cp -r cache/Ladder2017Season1/* cache/StarCraftII/Maps/
-	cp -r cache/3.16.1-Pack_1-fix/* cache/StarCraftII/Replays/
+	cp -r cache/Replays cache/StarCraftII/
+	cp -r cache/Battle.net cache/StarCraftII/
 
 cache/StarCraftII: cache/SC2.3.16.1.zip
 	cd cache && unzip -P iagreetotheeula SC2.3.16.1.zip
@@ -15,8 +16,11 @@ cache/StarCraftII: cache/SC2.3.16.1.zip
 cache/Ladder2017Season1: cache/Ladder2017Season1.zip
 	cd cache && unzip -P iagreetotheeula Ladder2017Season1.zip
 
-cache/3.16.1-Pack_1-fix: cache/3.16.1-Pack_1-fix.zip
+cache/Replays: cache/3.16.1-Pack_1-fix.zip
 	cd cache && unzip -P iagreetotheeula 3.16.1-Pack_1-fix.zip
+	# fix timestamp
+	touch cache/Replays
+	touch cache/Battle.net
 
 cache/SC2.3.16.1.zip:
 	cd cache && wget http://blzdistsc2-a.akamaihd.net/Linux/SC2.3.16.1.zip
