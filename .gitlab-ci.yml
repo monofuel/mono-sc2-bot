@@ -28,5 +28,5 @@ lint_python:
 compile_python:
   stage: build
   script:
-    - docker-compose run ai make compile_python
+    - docker-compose run ai make py_compile
     - docker-compose run ai chown -R $UID ./*
