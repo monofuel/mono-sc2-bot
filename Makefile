@@ -1,5 +1,5 @@
 
-setup: setup_git unpack
+setup: fixCacheTimestamps setup_git unpack
 
 setup_git:
 	git submodule init
@@ -10,13 +10,16 @@ unpack:	cache/StarCraftII cache/Ladder2017Season1 cache/Replays
 	cp -r cache/Replays cache/StarCraftII/
 	cp -r cache/Battle.net cache/StarCraftII/
 
+fixCacheTimestamps:
+	# hack to update timestamp from CI cache
+	if [ -f cache/StarCraftII ]; then touch cache/StarCraftII; fi
+	if [ -f cache/StarCraftII ]; then touch cache/Ladder2017Season1; fi
+
 cache/StarCraftII: cache/SC2.3.16.1.zip
 	cd cache && unzip -P iagreetotheeula SC2.3.16.1.zip
-	touch cache/StarCraftII
 
 cache/Ladder2017Season1: cache/Ladder2017Season1.zip
 	cd cache && unzip -P iagreetotheeula Ladder2017Season1.zip
-	touch cache/Ladder2017Season1
 
 cache/Replays: cache/3.16.1-Pack_1-fix.zip
 	cd cache && unzip -P iagreetotheeula 3.16.1-Pack_1-fix.zip
