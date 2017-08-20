@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 from s2clientprotocol import sc2api_pb2
 
 if __name__ == "__main__":

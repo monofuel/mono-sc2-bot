@@ -6,6 +6,7 @@ stages:
   - init
   - lint
   - build
+  - test
 
 setup_deps:
   stage: init
@@ -29,4 +30,10 @@ compile_python:
   stage: build
   script:
     - docker-compose run ai make py_compile
+    - docker-compose run ai chown -R $UID ./*
+
+smoke:
+  stage: test
+  script:
+    - docker-compose run ai
     - docker-compose run ai chown -R $UID ./*
