@@ -4,3 +4,13 @@ services:
     build: .
     volumes:
       - ./:/app
+    links:
+      - starcraft
+    environment:
+      - STARCRAFT_HOST=starcraft
+      - STARCRAFT_PORT=5000
+  starcraft:
+    image: debian
+    command: /StarCraftII/Versions/Base55958/SC2_x64 -listen 127.0.0.1 -port 5000
+    volumes:
+      - ./cache/StarCraftII:/StarCraftII

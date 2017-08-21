@@ -35,5 +35,7 @@ compile_python:
 smoke:
   stage: test
   script:
+    - docker-compose up -d starcraft
     - docker-compose run ai
+    - docker-compose down starcraft
     - docker-compose run ai chown -R $UID ./*
