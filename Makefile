@@ -52,3 +52,5 @@ protos: setup_git
 docker_setup:
 	docker-compose build
 
+run:
+	python3 ai/main.py
