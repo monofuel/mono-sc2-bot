@@ -40,14 +40,11 @@ freeze:
 	# work around bug
 	pip freeze | grep -v 'pkg-resources==0.0.0' > requirements.txt
 
-py_compile: protos
+py_compile:
 	python -m py_compile ./ai/main.py
 
 lint:
 	flake8 ./ai/
-
-protos: setup_git
-	protoc -I=./s2client-proto/ --python_out=./ai ./s2client-proto/s2clientprotocol/*.proto
 
 docker_setup:
 	docker-compose build
