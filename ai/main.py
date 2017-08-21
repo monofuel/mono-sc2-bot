@@ -5,6 +5,17 @@ import tensorflow as tf
 import websockets
 import asyncio
 import os
+import logging
+
+
+logger = logging.getLogger("SC2AI")
+logger.setLevel(logging.DEBUG)
+
+console = logging.StreamHandler()
+console.setLevel(logging.DEBUG)
+formatter = logging.Formatter('%(name)-12s: %(levelname)-8s %(message)s')
+console.setFormatter(formatter)
+logger.addHandler(console)
 
 
 class ControllerConfig:
@@ -16,19 +27,19 @@ class ControllerConfig:
 class Controller:
     def __init__(self, config):
         self.uri = "ws://%s:%d/sc2api" % (config.host, config.port)
-        print("connecting to SC2 URI: %s" % (self.uri))
+        logger.debug("will use SC2 URI: %s" % (self.uri))
 
     async def connect(self):
+        logger.debug("connecting to sc2 api")
         self.socket = await websockets.connect(self.uri)
-        self.socket.send("foobar")
-        print('connected to sc2 api')
+        logger.info('connected to sc2 api')
 
     async def send(self, request):
         await self.socket.send(request.SerializeToString())
 
 
 async def main():
-    print("hello world")
+    logger.info("Starting main AI function")
 
     config = ControllerConfig()
     controller = Controller(config)
@@ -40,7 +51,7 @@ async def main():
 
     hello = tf.constant('Hello, TensorFlow!')
     sess = tf.Session()
-    print(sess.run(hello))
+    logger.debug(sess.run(hello))
 
 if __name__ == "__main__":
     asyncio.get_event_loop().run_until_complete(main())
