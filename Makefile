@@ -13,8 +13,8 @@ unpack:	cache/StarCraftII cache/Ladder2017Season1
 
 fixCacheTimestamps:
 	# hack to update timestamp from CI cache
-	if [ -f cache/StarCraftII ]; then touch cache/StarCraftII; fi
-	if [ -f cache/Ladder2017Season1 ]; then touch cache/Ladder2017Season1; fi
+	if [ -e cache/StarCraftII ]; then touch cache/StarCraftII; fi
+	if [ -e cache/Ladder2017Season1 ]; then touch cache/Ladder2017Season1; fi
 
 cache/StarCraftII: cache/SC2.3.16.1.zip
 	cd cache && unzip -P iagreetotheeula SC2.3.16.1.zip
