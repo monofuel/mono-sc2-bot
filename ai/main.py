@@ -25,7 +25,7 @@ class ControllerConfig:
 
 class Controller:
     def __init__(self, config: ControllerConfig):
-        self.uri = "ws://%s/sc2api" % (config.host, config.port)
+        self.uri = "ws://%s/sc2api" % (config.host)
         logger.debug("will use SC2 URI: %s" % (self.uri))
 
     async def connect(self):
