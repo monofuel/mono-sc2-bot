@@ -21,6 +21,4 @@ RUN pip install -r requirements.txt
 
 COPY . /app
 
-RUN make protos
-
 CMD [ "python3", "ai/main.py" ]
