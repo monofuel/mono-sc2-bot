@@ -5,10 +5,11 @@ setup_git:
 	git submodule init
 	git submodule update
 
-unpack:	cache/StarCraftII cache/Ladder2017Season1 cache/Replays
+unpack:	cache/StarCraftII cache/Ladder2017Season1
 	cp -r cache/Ladder2017Season1/* cache/StarCraftII/Maps/
-	cp -r cache/Replays cache/StarCraftII/
-	cp -r cache/Battle.net cache/StarCraftII/
+	# skipping replays for now
+	# cp -r cache/Replays cache/StarCraftII/
+	# cp -r cache/Battle.net cache/StarCraftII/
 
 fixCacheTimestamps:
 	# hack to update timestamp from CI cache
