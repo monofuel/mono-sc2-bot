@@ -53,4 +53,4 @@ docker_setup:
 	docker-compose build
 
 run:
-	python3 ai/main.py
+	TF_CPP_MIN_LOG_LEVEL=2 python3 ai/main.py
