@@ -20,13 +20,12 @@ logger.addHandler(console)
 
 class ControllerConfig:
     def __init__(self):
-        self.host = os.environ.get("STARCRAFT_HOST", "localhost")
-        self.port = os.environ.get("STARCRAFT_PORT", 5000)
+        self.host = os.environ.get("STARCRAFT_HOST", "localhost:5000")
 
 
 class Controller:
     def __init__(self, config: ControllerConfig):
-        self.uri = "ws://%s:%d/sc2api" % (config.host, config.port)
+        self.uri = "ws://%s/sc2api" % (config.host, config.port)
         logger.debug("will use SC2 URI: %s" % (self.uri))
 
     async def connect(self):
