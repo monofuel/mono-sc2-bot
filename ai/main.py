@@ -36,7 +36,10 @@ class Controller:
 
     async def send(self, **req):
         msg = sc2api_pb2.Request(**req)
-        logger.debug('sending message:\n=====\n%s-----' % str(req))
+        if not msg.IsInitialized():
+            logger.error("msg not initialized:\n%s" % str(msg))
+
+        logger.debug('sending message:\n=====\n%s-----' % str(msg))
         await self.socket.send(msg.SerializeToString())
         # return getattr(res, list(req.keys())[0])
 
@@ -54,8 +57,18 @@ async def main():
 
     map_path = os.environ.get("MAP_PATH", "/StarCraftII/Maps/")
 
-    createRequest = sc2api_pb2.RequestCreateGame(local_map=sc2api_pb2.LocalMap(
-            map_path="%s/%s" % (map_path, "BelShirVestigeLE.SC2Map")))
+    createRequest = sc2api_pb2.RequestCreateGame(
+        local_map=sc2api_pb2.LocalMap(
+            map_path="%s/%s" % (map_path, "BelShirVestigeLE.SC2Map")
+        ),
+        player_setup=[
+            sc2api_pb2.PlayerSetup(
+                type=sc2api_pb2.Computer
+            ),
+            sc2api_pb2.PlayerSetup(
+                type=sc2api_pb2.Participant
+            )]
+    )
     await controller.send(create_game=createRequest)
     logger.info("sent request to create map")
     resp = await controller.recv()
