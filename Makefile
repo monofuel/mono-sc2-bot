@@ -50,4 +50,5 @@ docker_setup:
 	docker-compose build
 
 run:
-	TF_CPP_MIN_LOG_LEVEL=2 python3 ai/main.py
+
+	MAP_PATH="`pwd`/cache/StarCraftII/Maps" TF_CPP_MIN_LOG_LEVEL=2 python3 ai/main.py

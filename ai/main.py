@@ -34,10 +34,11 @@ class Controller:
         self.socket = await websockets.connect(self.uri)
         logger.info('connected to sc2 api')
 
-    async def send(self, req):
-        msg = req.SerializeToString()
-        logger.debug('sending message %s' % msg)
-        await self.socket.send(msg)
+    async def send(self, **req):
+        msg = sc2api_pb2.Request(**req)
+        logger.debug('sending message:\n=====\n%s-----' % str(req))
+        await self.socket.send(msg.SerializeToString())
+        # return getattr(res, list(req.keys())[0])
 
     async def recv(self):
         resp = await self.socket.recv()
@@ -51,13 +52,14 @@ async def main():
     controller = Controller(config)
     await controller.connect()
 
+    map_path = os.environ.get("MAP_PATH", "/StarCraftII/Maps/")
+
     createRequest = sc2api_pb2.RequestCreateGame(local_map=sc2api_pb2.LocalMap(
-            map_path="BelShirVestigeLE.SC2Map"))
-    await controller.send(createRequest)
+            map_path="%s/%s" % (map_path, "BelShirVestigeLE.SC2Map")))
+    await controller.send(create_game=createRequest)
     logger.info("sent request to create map")
     resp = await controller.recv()
     logger.debug("{}".format(resp))
-
 
     hello = tf.constant('Hello, TensorFlow!')
     sess = tf.Session()
