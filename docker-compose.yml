@@ -4,8 +4,6 @@ services:
     build: .
     volumes:
       - ./:/app
-    links:
-      - starcraft
     environment:
       - STARCRAFT_HOST=starcraft
       - STARCRAFT_PORT=5000
