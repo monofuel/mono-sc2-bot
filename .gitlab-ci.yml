@@ -39,3 +39,6 @@ smoke:
     - docker-compose run ai
     - docker-compose down starcraft
     - docker-compose run ai chown -R $UID ./*
+  cache:
+    paths:
+      - ./cache/
